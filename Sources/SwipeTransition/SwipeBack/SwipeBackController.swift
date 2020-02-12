@@ -58,7 +58,7 @@ public final class SwipeBackController: NSObject {
         context.navigationControllerDelegateProxy = NavigationControllerDelegateProxy(delegates: [self] + (delegate.map { [$0] } ?? []) )
     }
 
-    public func observePageViewController(_ scrollView: UIScrollView, isFirstPage: @escaping () -> Bool) {
+    public func observeScrollView(_ scrollView: UIScrollView, isFirstPage: @escaping () -> Bool) {
         scrollView.panGestureRecognizer.require(toFail: panGestureRecognizer)
         context.scrollViewPanGestureRecognizer = scrollView.panGestureRecognizer
         isFirstPageOfPageViewController = isFirstPage
