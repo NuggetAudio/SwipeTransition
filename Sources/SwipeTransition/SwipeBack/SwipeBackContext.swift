@@ -16,7 +16,7 @@ final class SwipeBackContext: Context<UINavigationController>, ContextType {
         }
     }
 
-    weak var pageViewControllerPanGestureRecognizer: UIPanGestureRecognizer?
+    weak var scrollViewPanGestureRecognizer: UIPanGestureRecognizer?
 
     override var allowsTransitionStart: Bool {
         guard let navigationController = target else { return false }

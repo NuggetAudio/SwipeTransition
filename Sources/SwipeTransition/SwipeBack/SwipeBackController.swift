@@ -58,13 +58,9 @@ public final class SwipeBackController: NSObject {
         context.navigationControllerDelegateProxy = NavigationControllerDelegateProxy(delegates: [self] + (delegate.map { [$0] } ?? []) )
     }
 
-    public func observePageViewController(_ pageViewController: UIPageViewController, isFirstPage: @escaping () -> Bool) {
-        let scrollView = pageViewController.view.subviews
-            .lazy
-            .compactMap { $0 as? UIScrollView }
-            .first
-        scrollView?.panGestureRecognizer.require(toFail: panGestureRecognizer)
-        context.pageViewControllerPanGestureRecognizer = scrollView?.panGestureRecognizer
+    public func observePageViewController(_ scrollView: UIScrollView, isFirstPage: @escaping () -> Bool) {
+        scrollView.panGestureRecognizer.require(toFail: panGestureRecognizer)
+        context.scrollViewPanGestureRecognizer = scrollView.panGestureRecognizer
         isFirstPageOfPageViewController = isFirstPage
     }
 
@@ -90,8 +86,8 @@ public final class SwipeBackController: NSObject {
 
 extension SwipeBackController: UIGestureRecognizerDelegate {
     public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        guard context.pageViewControllerPanGestureRecognizer == nil else {
-            if gestureRecognizer != context.pageViewControllerPanGestureRecognizer,
+        guard context.scrollViewPanGestureRecognizer == nil else {
+            if gestureRecognizer != context.scrollViewPanGestureRecognizer,
                 let isFirstPage = isFirstPageOfPageViewController?(), isFirstPage,
                 let view = gestureRecognizer.view, panGestureRecognizer.translation(in: view).x > 0 {
                 return true
