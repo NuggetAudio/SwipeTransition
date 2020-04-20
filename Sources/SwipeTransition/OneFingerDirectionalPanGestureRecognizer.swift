@@ -8,17 +8,17 @@
 
 import UIKit
 
-final class OneFingerDirectionalPanGestureRecognizer: UIPanGestureRecognizer {
-    enum PanDirection {
+public final class OneFingerDirectionalPanGestureRecognizer: UIPanGestureRecognizer {
+    public enum PanDirection {
         case up //swiftlint:disable:this identifier_name
         case down
         case left
         case right
     }
 
-    let direction: PanDirection
+    public let direction: PanDirection
 
-    required init(direction: PanDirection, target: Any? = nil, action: Selector? = nil) {
+    public required init(direction: PanDirection, target: Any? = nil, action: Selector? = nil) {
         self.direction = direction
         super.init(target: target, action: action)
         maximumNumberOfTouches = 1
@@ -26,7 +26,7 @@ final class OneFingerDirectionalPanGestureRecognizer: UIPanGestureRecognizer {
         delaysTouchesBegan = true
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
 
         if state == .began {

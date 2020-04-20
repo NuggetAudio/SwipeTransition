@@ -33,7 +33,7 @@ public final class SwipeBackController: NSObject {
 
     private lazy var animator = SwipeBackAnimator(parent: self)
     private let context: SwipeBackContext
-    private lazy var panGestureRecognizer = OneFingerDirectionalPanGestureRecognizer(direction: .right, target: self, action: #selector(handlePanGesture(_:)))
+    public lazy var panGestureRecognizer = OneFingerDirectionalPanGestureRecognizer(direction: .right, target: self, action: #selector(handlePanGesture(_:)))
     private weak var navigationController: UINavigationController?
 
     public required init(navigationController: UINavigationController) {
@@ -64,7 +64,7 @@ public final class SwipeBackController: NSObject {
         isFirstPageOfPageViewController = isFirstPage
     }
 
-    @objc private func handlePanGesture(_ recognizer: OneFingerDirectionalPanGestureRecognizer) {
+    @objc public func handlePanGesture(_ recognizer: OneFingerDirectionalPanGestureRecognizer) {
         switch recognizer.state {
         case .began:
             context.startTransition()
